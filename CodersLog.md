@@ -39,6 +39,24 @@ Oh boy what I have got into to.
 
 So far I've learned the basics of Python, I/O and all of that, so I think I can can google enough info to get this beta working. The whole idea of this beta is to just create a proof that I can run the SHA-256 protocol in the most basic, generic way possible. From there I can work out how I can grow from it. I'll add my next log when I finish the beta. 
 
+Oh yeah, this is the basic moves of SHA-256 used from 8 blocks with difficulty of 17 zeros
+
+1. Convert all hashes to binary 
+2. Hashes 1,2,3 have a position comparison, where if #1's < #0's MA-Hash = 1 in new position, otherwise MA-Hash = 0.
+3. Hash 1 is rotated 3 times, shifted right 2,13 and 22 bits respectively. if #1 is odd, Sum-0 Hash is 1 in that position
+4. Hash CH is created by mixing hashes 6 & 7 choosing from hash 5, where if hash 5 = 1 it takes the bit from hash 6 otherwise takes bit from has 7
+5. Hash 5 is then rotated like 1, only 6,11,25 bits right. summed up simillarly. creates Sum-1
+6. w_t and k_t undero 32-bit addition produce P_t
+7.  P_t and CH undergo 32-bit addition o creat CHP_t
+8. Sum-1 and CHP_t undergo 32-bit addition to create CHP-1 
+9. CHP-1 and hash 4 undergo 32-bit to create the new Hash 5
+10. MA-Hash, and CHP-1 undergo 32-bit to create MA-cHP-1 
+11. MA-CHP-1 and Sum-0 undergo 32bit to creat MCP-10 which becomes the new A block. this is the block that must have 17 zeros to produce a succesfful mine/answer to the question.
+
+these are the general steps I have, need to define 32-bit addition and what K_t(constants) and how to produce W_t(input) but after that I believe I will have all I need to solve SHA-256.
+
+
+
 This is Donnum, signing off.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
